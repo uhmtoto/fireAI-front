@@ -13,10 +13,14 @@ export default {
     login () {
       this.$http.post('/auth/login', this.form)
         .then(r => {
-          this.$http.defaults.headers.common['authorization'] = r.data.token
           localStorage.userToken = r.data.token
           localStorage.userInfo = JSON.stringify(r.data.userInfo)
+
+          this.$http.defaults.headers.common['authorization'] = r.data.token
+
           this.$store.commit('setUserInfo', r.data.userInfo)
+          this.$store.commit('setIsAuth', true)
+
           this.$router.push('/')
         })
         .catch(e => {
@@ -29,6 +33,7 @@ export default {
 
 <template>
 <div class="container">
+  <h1>로그인</h1>
   <input
     class="input"
     type="email"
@@ -49,14 +54,12 @@ export default {
   >
     로그인
   </button>
+  <br>
   <router-link
+    style="color: black;"
     to="/auth/register"
   >
-    <button
-      class="button"
-    >
-      가입
-    </button>
+    계정이 없으신가요?
   </router-link>
 </div>
 </template>
