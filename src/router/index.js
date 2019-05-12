@@ -8,12 +8,15 @@ import Main from '@/pages/Main'
 import Login from '@/pages/auth/Login'
 import Register from '@/pages/auth/Register'
 
+import RegisterSensor from '@/pages/register/Sensor'
+
 Vue.use(Router)
 
 const requireAuth = (to, from, next) => {
   if (localStorage.userInfo) {
     axios.defaults.headers.common['authorization'] = localStorage.userToken
     store.commit('setUserInfo', JSON.parse(localStorage.userInfo))
+    store.commit('setIsAuth', true)
     return next()
   }
 
@@ -22,7 +25,12 @@ const requireAuth = (to, from, next) => {
 }
 
 const forbidAuth = (to, from, next) => {
-  if (store.getters.getUserInfo) return next('/')
+  if (localStorage.userInfo) {
+    axios.defaults.headers.common['authorization'] = localStorage.userToken
+    store.commit('setUserInfo', JSON.parse(localStorage.userInfo))
+    store.commit('setIsAuth', true)
+  }
+  if (store.getters.getIsAuth) return next('/')
   next()
 }
 
@@ -50,8 +58,9 @@ export default new Router({
       path: '/auth/logout',
       name: 'Logout',
       beforeEnter: (to, from, next) => {
-        axios.defaults.headers.common['authorization'] = ''
+        axios.defaults.headers.common['authorization'] = null
         store.commit('setUserInfo', '')
+        store.commit('setIsAuth', false)
         localStorage.userInfo = ''
         localStorage.userToken = ''
         next('/auth/login')
