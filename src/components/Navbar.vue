@@ -23,7 +23,7 @@ export default {
     class="item"
     to="/auth/logout"
   >
-    로그아웃
+    <i class="fas fa-sign-out-alt"></i>
   </router-link>
   <router-link
     v-if="getIsAuth"
