@@ -65,6 +65,12 @@ export default new Router({
         localStorage.userToken = ''
         next('/auth/login')
       }
+    },
+    {
+      path: '/register/sensor',
+      name: 'RegisterSensor',
+      component: RegisterSensor,
+      beforeEnter: requireAuth
     }
   ]
 })
