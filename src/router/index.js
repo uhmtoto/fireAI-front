@@ -21,6 +21,11 @@ const requireAuth = (to, from, next) => {
   next('/auth/login')
 }
 
+const forbidAuth = (to, from, next) => {
+  if (store.getters.getUserInfo) return next('/')
+  next()
+}
+
 export default new Router({
   routes: [
     {
@@ -32,12 +37,14 @@ export default new Router({
     {
       path: '/auth/login',
       name: 'Login',
-      component: Login
+      component: Login,
+      beforeEnter: forbidAuth
     },
     {
       path: '/auth/register',
       name: 'Register',
-      component: Register
+      component: Register,
+      beforeEnter: forbidAuth
     },
     {
       path: '/auth/logout',

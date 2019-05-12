@@ -9,11 +9,6 @@ export default {
       }
     }
   },
-  beforeCreate () {
-    if (this.$store.getters.getUserInfo) {
-      this.$router.push('/')
-    }
-  },
   methods: {
     login () {
       this.$http.post('/auth/login', this.form)
