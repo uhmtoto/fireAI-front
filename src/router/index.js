@@ -9,6 +9,7 @@ import Login from '@/pages/auth/Login'
 import Register from '@/pages/auth/Register'
 
 import RegisterSensor from '@/pages/register/Sensor'
+import RegisterRoom from '@/pages/register/Room'
 
 Vue.use(Router)
 
@@ -70,6 +71,12 @@ export default new Router({
       path: '/register/sensor',
       name: 'RegisterSensor',
       component: RegisterSensor,
+      beforeEnter: requireAuth
+    },
+    {
+      path: '/register/room',
+      name: 'RegisterRoom',
+      component: RegisterRoom,
       beforeEnter: requireAuth
     }
   ]
