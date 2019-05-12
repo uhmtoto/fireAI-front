@@ -27,6 +27,7 @@ export default {
 
 <template>
 <div class="container">
+  <h1>회원가입</h1>
   <input
     class="input"
     type="email"
