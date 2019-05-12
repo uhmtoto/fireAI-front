@@ -1,6 +1,11 @@
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  computed: {
+    ...mapGetters(['getIsAuth'])
+  }
 }
 </script>
 
@@ -12,21 +17,23 @@ export default {
   >
     <i class="fas fa-fire"></i>
     부리양
-    <i class="fas fa-fire-extinguisher"></i>
   </router-link>
   <router-link
+    v-if="getIsAuth"
     class="item"
     to="/auth/logout"
   >
     로그아웃
   </router-link>
   <router-link
+    v-if="getIsAuth"
     class="item"
     to="/register/room"
   >
     호실 등록
   </router-link>
   <router-link
+    v-if="getIsAuth"
     class="item"
     to="/register/sensor"
   >
