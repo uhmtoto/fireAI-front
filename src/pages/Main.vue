@@ -16,7 +16,7 @@ export default {
 
 <template>
 <div class="main">
-<h2>{{ `현재 화재 발생 ${status.fire.length}건, 화재 의심 ${status.warning.length}건` }}</h2>
+  <h2>{{ `현재 화재 발생 ${status.fire.length}건, 화재 의심 ${status.warning.length}건` }}</h2>
 </div>
 </template>
 
