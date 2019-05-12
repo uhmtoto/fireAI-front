@@ -1,28 +1,21 @@
 <script>
 export default {
-  name: 'Login',
+  name: 'Register',
   data () {
     return {
       form: {
         email: '',
-        password: ''
+        password: '',
+        name: ''
       }
     }
   },
-  beforeCreate () {
-    if (this.$store.getters.getUserInfo) {
-      this.$router.push('/')
-    }
-  },
   methods: {
-    login () {
-      this.$http.post('/auth/login', this.form)
+    register () {
+      this.$http.post('/auth/register', this.form)
         .then(r => {
-          this.$http.defaults.headers.common['authorization'] = r.data.token
-          localStorage.userToken = r.data.token
-          localStorage.userInfo = JSON.stringify(r.data.userInfo)
-          this.$store.commit('setUserInfo', r.data.userInfo)
-          this.$router.push('/')
+          this.$swal('성공', '회원가입을 성공했습니다.', 'success')
+          this.$router.push('/auth/login')
         })
         .catch(e => {
           this.$swal('오류', e.response.data.error, 'error')
@@ -39,45 +32,28 @@ export default {
     type="email"
     v-model="form.email"
     placeholder="이메일"
-    @keyup.enter="login"
+  />
+  <input
+    class="input"
+    v-model="form.name"
+    placeholder="이름"
   />
   <input
     class="input"
     type="password"
     v-model="form.password"
     placeholder="비밀번호"
-    @keyup.enter="login"
   />
   <button
-    @click="login"
+    @click="register"
     class="button"
   >
-    로그인
+    가입
   </button>
-  <router-link
-    to="/auth/register"
-  >
-    <button
-      class="button"
-    >
-      가입
-    </button>
-  </router-link>
 </div>
 </template>
 
 <style>
-.container {
-  margin-top: 15%;
-  margin-left: 15px;
-}
-
-@media (min-width: 500px) {
-  .container {
-    margin-left: 30%;
-  }
-}
-
 .input {
   border-radius: 50px;
   outline: none;

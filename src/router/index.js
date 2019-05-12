@@ -4,7 +4,9 @@ import store from '@/vuex/store'
 import axios from 'axios'
 
 import Main from '@/pages/Main'
+
 import Login from '@/pages/auth/Login'
+import Register from '@/pages/auth/Register'
 
 Vue.use(Router)
 
@@ -31,6 +33,11 @@ export default new Router({
       path: '/auth/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/auth/register',
+      name: 'Register',
+      component: Register
     },
     {
       path: '/auth/logout',
