@@ -5,11 +5,11 @@ export default {
   name: 'RegisterSensor',
   data () {
     return {
+      rooms: [],
       form: {
         name: '',
         type: '',
-        floor: null,
-        position: null
+        room: ''
       }
     }
   },
@@ -17,15 +17,26 @@ export default {
     sensors: () => sensors
   },
   methods: {
-    register () {
-      this.$http.post('/sensor', this.form)
+    async register () {
+      this.form.room = this.rooms.find(v => v.name === this.form.room)._id
+      this.form.type = sensors.find(v => v.kor === this.form.type).eng
+      await this.$http.post('/sensor', this.form)
         .then(r => {
           this.$swal('성공', '센서를 성공적으로 등록했습니다.', 'success')
         })
         .catch(e => {
           this.$swal('오류', e.response.data.error, 'error')
         })
+      this.form = {
+        name: '', type: '', room: ''
+      }
     }
+  },
+  created () {
+    this.$http.get('/room')
+      .then(r => {
+        this.rooms = r.data
+      })
   }
 }
 </script>
@@ -41,16 +52,21 @@ export default {
 
   <input
     class="input"
-    type="number"
-    v-model="form.floor"
-    placeholder="센서 위치 (층)"
+    v-model="form.room"
+    placeholder="설치된 호실"
+    list="rooms"
   />
-
-  <input
-    class="input"
-    v-model="form.position"
-    placeholder="센서 좌표 (x좌표)"
-  />
+  <datalist
+    id="rooms"
+  >
+    <option
+      :key="`room-${room.eng}`"
+      :value="room.name"
+      v-for="room in rooms"
+    >
+      {{ room.name }}
+    </option>
+  </datalist>
 
   <input
     class="input"
@@ -63,7 +79,7 @@ export default {
   >
     <option
       :key="`sensor-${sensor.eng}`"
-      :value="sensor.eng"
+      :value="sensor.kor"
       v-for="sensor in sensors"
     >
       {{ sensor.kor }}
