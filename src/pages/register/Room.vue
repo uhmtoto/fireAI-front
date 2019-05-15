@@ -5,8 +5,7 @@ export default {
     return {
       form: {
         name: '',
-        floor: null,
-        position: null
+        roomNumber: null
       }
     }
   },
@@ -36,14 +35,8 @@ export default {
   <input
     class="input"
     type="number"
-    v-model="form.floor"
-    placeholder="호실 위치 (층)"
-  />
-
-  <input
-    class="input"
-    v-model="form.position"
-    placeholder="호실 좌표 (x좌표)"
+    v-model="form.roomNumber"
+    placeholder="호실 번호"
   />
 
   <button
