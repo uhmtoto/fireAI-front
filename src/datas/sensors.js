@@ -3,5 +3,6 @@ export default [
   { eng: 'spark', kor: '불꽃' },
   { eng: 'gradient', kor: '기울기' },
   { eng: 'humidity', kor: '습도' },
-  { eng: 'noise', kor: '소리' }
+  { eng: 'noise', kor: '소리' },
+  { eng: 'temperature', kor: '온도' }
 ]
