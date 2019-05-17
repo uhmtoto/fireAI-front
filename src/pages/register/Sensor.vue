@@ -18,8 +18,8 @@ export default {
   },
   methods: {
     async register () {
+      this.form.room = this.rooms.find(v => v.name === this.form.room)._id
       this.form.type = sensors.find(v => v.kor === this.form.type).eng
-      this.form.room = this.rooms.find(v => v.name === this.form.room)
       await this.$http.post('/sensor', this.form)
         .then(r => {
           this.$swal('성공', '센서를 성공적으로 등록했습니다.', 'success')

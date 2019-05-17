@@ -11,7 +11,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueSweetAlert2)
 Vue.prototype.$http = axios.create({
-  baseURL: 'http://localhost:3000'
+  baseURL: 'http://uhmtoto.xyz:3000'
 })
 
 /* eslint-disable no-new */
