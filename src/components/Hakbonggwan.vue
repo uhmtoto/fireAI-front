@@ -57,7 +57,7 @@ export default {
 
 <style>
 .table {
-  width: 100%;
+  width: 50%;
   height: 100%;
   margin-right: 7px;
   border-collapse: collapse;
@@ -69,5 +69,10 @@ tbody {
   text-align: center;
   border: 0.7x solid #444444;
   border-collapse: collapse;
+}
+
+td {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 </style>

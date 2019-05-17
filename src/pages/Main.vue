@@ -32,7 +32,7 @@ export default {
   <div class="chart">
     <TemperatureChartByFloor id="t-chart" :width="300"/>
     <TemperatureChartByTime id="t-chart" :width="300"/>
-    <Hakbonggwan />
+    <Hakbonggwan chart="hakbong" />
   </div>
 </div>
 </template>
